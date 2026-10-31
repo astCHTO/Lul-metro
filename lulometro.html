@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lulômetro</title>
+  <link rel="stylesheet" href="lulometro.css">
+  <style>
+    h1 {
+      font-size: 100px;
+      margin: 0;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <audio autoplay loop> <!-- controls -->
+    <source src="hino.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+  <img src="burros.jpg" alt="burros" class="burros">
+  <br>
+  <img src="lula-maromba-flex.gif" alt="lula" class="lula">
+  <h1>LULÔMETRO</h1>
+  <div>MEDINDO QUANTO O PAINHO JÁ GASTOU PARA DEFENDER A DEMOCRACIA</div>
+  <div class="dinheiro">R$ 13.983.809.798.316,11</div>
+  <div><a href="/erro.html" class="o3l">link 1</a><a href="/erro.html" class="o3l">link 2</a><a href="/erro.html" class="o3l">link 3</a></div>
+  <br>
+  <div>Esta plataforma tem o objetivo de divulgar todos os projetos do Presidente Lula para proteger o perfeitil do Fascismo de extrema direita</div>
+  <br>
+  <div class="medidas">
+    <div class="medida">
+      <div class="data">05/01/2002</div>
+      <div>Criou o bolsa família para dar dignidade para os pobrezinhos do nordeste.</div>
+    </div>
+    <div class="line"></div>
+    <div class="medida">
+      <div class="data">2002 - (ainda contando)</div>
+      <div>Acabou com a fome no Brasil Três vezes, e vai acabar com ela mais uma quarta ainda.</div>
+    </div>
+    <div class="medida">
+      <div class="data">05/01/2022</div>
+      <div>Derrotou o bolsonarismo e instaurou o estádo democrático de esquerdo.</div>
+    </div>
+    <div class="line"></div>
+    <div class="medida">
+      <div class="data">01/08/2023</div>
+      <div>Taxou os burgueses que faziam compras antidemocráticas da China.</div>
+    </div>
+    <div class="medida">
+      <div class="data">20/05/2026</div>
+      <div>Regulamentou as Redes Sociais para preservar a democracia.</div>
+    </div>
+    <div class="line"></div>
+    <div class="medida">
+      <div class="data">17/09/2026</div>
+      <div>Criou a Lei Felca para proteger as criancinhas dos assediadores de extrema direita.</div>
+    </div>
+    <div class="medida">
+      <div class="data">2022 - (ainda contando)</div>
+      <div>Prendeu seus opositores políticos e manifestantes para preservar a democracia.</div>
+    </div>
+    <div class="line"></div>
+    <div class="medida">
+      <div class="data">25/10/2026</div>
+      <div>Fraudou as eleições para impedir que o candidato antidemocrático vencesse.</div>
+    </div>
+
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const elemento = document.querySelector(".dinheiro");
+
+      if (!elemento) return;
+
+      // 1. Pega o texto da div e extrai apenas os números (considerando a vírgula como decimal)
+      const textoOriginal = elemento.innerText;
+
+      // Remove "R$", pontos de milhar e troca a vírgula por ponto para o JS conseguir ler como número
+      const valorFinal = parseFloat(
+        textoOriginal
+          .replace("R$", "")
+          .replaceAll(".", "")
+          .replace(",", ".")
+          .trim()
+      );
+
+      const duracaoAnimacao = 200000; // Duração da animação (1 sec = 1000)
+      let tempoInicio = null;
+
+      function animarContagem(tempoAtual) {
+        if (!tempoInicio) tempoInicio = tempoAtual;
+        const progresso = Math.min((tempoAtual - tempoInicio) / duracaoAnimacao, 1);
+
+        // Efeito de easing opcional (deixa a desaceleração mais suave no final)
+        const progressoSuave = 1 - Math.pow(1 - progresso, 3);
+
+        const valorAtual = progressoSuave * valorFinal;
+
+        // Formata o número atual para o padrão brasileiro de moeda (R$ X.XXX,XX)
+        elemento.innerText = valorAtual.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+
+        if (progresso < 1) {
+          requestAnimationFrame(animarContagem);
+        } else {
+          // Garante que o valor final seja exatamente o da string original no último frame
+          elemento.innerText = textoOriginal;
+        }
+      }
+
+      // Inicia a animação
+      requestAnimationFrame(animarContagem);
+    });
+  </script>
+</body>
+
+</html>
